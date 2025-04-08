@@ -1,0 +1,27 @@
+&ACCESS RVP
+&REL 1
+&PARAM TEMPLATE = C:\KRC\ROBOTER\TEMPLATE\vorgabe
+&PARAM EDITMASK = *
+DEF StoneProcessing()
+  ;FOLD INI
+    GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
+    INTERRUPT ON 3
+    BAS (#INITMOV,0 )
+    BAS (#VEL_PTP,10 )
+    BAS (#ACC_PTP,20 )
+    BAS (#APO_PTP,0.5 )
+    BAS (#VEL_CP,10 )
+    BAS (#ACC_CP,20 )
+    BAS (#APO_CP,0.5 )
+    BAS (#OV_PRO,0 )
+    $ADVANCE=0
+    ;ENDFOLD
+    ;FOLD USER
+    ; Make your modifications here
+    ;ENDFOLD
+    ;FOLD PTP HOME  Vel=  %  DEFAULT
+    $BWDSTART = FALSE
+    PDAT_ACT=PDAT_FOLD
+    FDAT_ACT=FDAT_FOLD
+    BAS (#PTP_FOLD )
+    ;ENDFOLD 
